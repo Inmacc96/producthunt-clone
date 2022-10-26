@@ -18,6 +18,7 @@ html {
 body {
   font-size: 1.6rem; /*16 px*/
   line-height: 1.5;
+  font-family: "PT Sans", sans-serif;
 }
 
 h1,
@@ -27,12 +28,21 @@ h3 {
   line-height: 1.5;
 }
 
+h1,
+h2 {
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+h3 {
+  font-family: "PT Sans", sans-serif;
+}
+
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-a{
+a {
   text-decoration: none;
 }
