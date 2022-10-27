@@ -16,14 +16,10 @@ export default function Signup() {
     console.log("creando cuenta...");
   };
 
-  const { data, error, submitForm, handleChange, handleSubmit } = useValidation(
-    INITIAL_STATE,
-    validateSignUp,
-    createAccount
-  );
+  const { data, error, handleChange, handleSubmit, handleBlur } =
+    useValidation(INITIAL_STATE, validateSignUp, createAccount);
 
   const { name, email, password } = data;
-
 
   return (
     <Layout>
@@ -39,8 +35,12 @@ export default function Signup() {
               name="name"
               value={name}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
+
+          {error.name && <p className={styles.error}>{error.name}</p>}
+
           <div className={styles.field}>
             <label htmlFor="email">Email</label>
             <input
@@ -50,8 +50,12 @@ export default function Signup() {
               name="email"
               value={email}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
+
+          {error.email && <p className={styles.error}>{error.email}</p>}
+
           <div className={styles.field}>
             <label htmlFor="password">Password</label>
             <input
@@ -61,8 +65,12 @@ export default function Signup() {
               name="password"
               value={password}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
+
+          {error.password && <p className={styles.error}>{error.password}</p>}
+
           <input
             type="submit"
             value="Create account"

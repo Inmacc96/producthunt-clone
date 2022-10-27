@@ -40,12 +40,18 @@ const useValidation = (initialState, validate, fnSubmit) => {
     setSubmitForm(true);
   };
 
+  //Cuando se realiza el evento de blur(cuando el usuario está escribiendo y se sale)
+  const handleBlur = () => {
+    const errorsValidation = validate(data);
+    setError(errorsValidation);
+  };
+
   return {
     data,
     error,
-    submitForm,
     handleChange,
     handleSubmit,
+    handleBlur
   };
 };
 
