@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const useValidation = (initialState, validate, fnSubmit) => {
   //initialState: el estado inicial
-  //validate: Lo que vamos a validar
+  //validate: Lo que vamos a validar, basicamente las reglas de validación
   //fnSubmit: Función que se va a ejecutar cuando se haga el submit
 
   //Los valores que el usuario introduzca en los inputs
@@ -22,7 +22,7 @@ const useValidation = (initialState, validate, fnSubmit) => {
 
       setSubmitForm(false);
     }
-  }, []);
+  }, [error]);
 
   //Función que se ejecuta conforme el usuario escribe algo
   const handleChange = (e) => {
