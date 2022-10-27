@@ -4,6 +4,8 @@ import Link from "next/link";
 import styles from "../styles/Header.module.css";
 
 const Header = () => {
+  const user = true;
+
   return (
     <header className={styles.header}>
       <div className={styles.containerHeader}>
@@ -17,12 +19,34 @@ const Header = () => {
           <Nav />
         </div>
 
-        <div>
-          <p>Hola: Inma</p>
+        <div className={styles.containerButtons}>
+          {user ? (
+            <>
+              <p className={styles.userGreetings}>Hola: Inma</p>
 
-          <button type="button">Log Out</button>
-          <Link href="/">Log In</Link>
-          <Link href="/">Sign Up</Link>
+              <Link
+                href="/"
+                className={`${styles.button} ${styles.buttonDark}`}
+              >
+                Log Out
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/"
+                className={`${styles.button} ${styles.buttonDark}`}
+              >
+                Log In
+              </Link>
+              <Link
+                href="/"
+                className={`${styles.button} ${styles.buttonLight}`}
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

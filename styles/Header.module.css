@@ -24,3 +24,38 @@
   font-family: "Roboto Slab", serif;
   margin-right: 2rem;
 }
+
+.containerButtons {
+  display: flex;
+  align-items: center;
+}
+
+.userGreetings {
+  margin-right: 2rem;
+}
+
+.button {
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid #d1d1d1;
+  padding: 0.8rem 2rem;
+  margin-right: 1rem;
+}
+
+.button:last-of-type {
+  margin-right: 0;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+
+.buttonDark {
+  color: white;
+  background-color: #da552f;
+}
+
+.buttonLight {
+  color: #000;
+  background-color: white;
+}
