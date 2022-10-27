@@ -1,11 +1,9 @@
 import Layout from "../components/Layout";
 
-const Aboutus = () => {
+export default function Signup() {
   return (
     <Layout>
-      <p>About us</p>
+      <p>Sign Up</p>
     </Layout>
   );
-};
-
-export default Aboutus;
+}

@@ -5,8 +5,8 @@ const Nav = () => {
   return (
     <nav className={styles.nav}>
       <Link href="/">Home</Link>
-      <Link href="/">Popular</Link>
-      <Link href="/">Recent</Link>
+      <Link href="/popular">Popular</Link>
+      <Link href="/recent">Recent</Link>
     </nav>
   );
 };

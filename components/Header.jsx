@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "../styles/Header.module.css";
 
 const Header = () => {
-  const user = true;
+  const user = false;
 
   return (
     <header className={styles.header}>
@@ -34,13 +34,13 @@ const Header = () => {
           ) : (
             <>
               <Link
-                href="/"
+                href="/login"
                 className={`${styles.button} ${styles.buttonDark}`}
               >
                 Log In
               </Link>
               <Link
-                href="/"
+                href="/signup"
                 className={`${styles.button} ${styles.buttonLight}`}
               >
                 Sign Up
