@@ -1,0 +1,38 @@
+.form {
+  max-width: 600px;
+  width: 95%;
+  margin: 5rem auto 0 auto;
+}
+
+.field {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.field label {
+  flex: 0 0 150px;
+  font-size: 1.8rem;
+}
+
+.field input {
+  flex: 1;
+  padding: 1rem;
+}
+
+.inputSubmit {
+  background-color: var(--orange);
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  border: none;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+}
+
+.inputSubmit:hover{
+    cursor: pointer;
+}
