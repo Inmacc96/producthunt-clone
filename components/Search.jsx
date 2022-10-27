@@ -1,12 +1,16 @@
+import styles from "../styles/Search.module.css";
 
 const Search = () => {
   return (
-    <form>
-        <input type="text" />
+    <form className={styles.formSearch}>
+      <input type="text" className={styles.inputText}
+      placeholder="Search Products" />
 
-        <button type="submit">Search</button>
+      <button type="submit" className={styles.inputSubmit}>
+        Search
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

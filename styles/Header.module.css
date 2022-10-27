@@ -16,6 +16,11 @@
   }
 }
 
+.containerSearchNav{
+    display: flex;
+    align-items: center;
+}
+
 .logo {
   color: var(--orange);
   font-size: 4rem;

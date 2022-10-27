@@ -1,0 +1,14 @@
+.nav{
+    padding-left: 2rem;
+}
+
+.nav a{
+    font-size: 1.8rem;
+    margin-left: 2rem;
+    color: var(--grey2);
+    font-family: "PT Sans", sans-serif; 
+}
+
+.nav a:last-of-type{
+    margin-right: 0;
+}
