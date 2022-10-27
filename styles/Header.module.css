@@ -1,0 +1,26 @@
+.header {
+  border-bottom: 2px solid var(--grey3);
+  padding: 1rem 0;
+}
+
+.containerHeader {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .containerHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.logo {
+  color: var(--orange);
+  font-size: 4rem;
+  line-height: 0;
+  font-weight: 600;
+  font-family: "Roboto Slab", serif;
+  margin-right: 2rem;
+}

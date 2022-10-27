@@ -1,13 +1,16 @@
 import Search from "./Search";
 import Nav from "./Nav";
 import Link from "next/link";
+import styles from "../styles/Header.module.css";
 
 const Header = () => {
   return (
-    <header>
-      <div>
+    <header className={styles.header}>
+      <div className={styles.containerHeader}>
         <div>
-          <p>P</p>
+          <Link href="/">
+            <p className={styles.logo}> P </p>
+          </Link>
 
           <Search />
 
