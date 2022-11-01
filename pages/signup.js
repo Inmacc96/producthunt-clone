@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Router from "next/router";
 import Layout from "../components/Layout";
 import styles from "../styles/Form.module.css";
 
@@ -14,6 +16,8 @@ const INITIAL_STATE = {
 };
 
 export default function Signup() {
+  const [errorSignUp, setErrorSignUp] = useState("");
+
   const { data, error, handleChange, handleSubmit, handleBlur } = useValidation(
     INITIAL_STATE,
     validateSignUp,
@@ -25,8 +29,16 @@ export default function Signup() {
   async function createAccount() {
     try {
       await register(name, email, password);
+      Router.push("/");
     } catch (err) {
       console.error("An error occurred when creating the user", err.message);
+      if (err.message.match(/auth[^()]*/)[0] === "auth/email-already-in-use") {
+        setErrorSignUp(
+          "The email address is already in use by another account"
+        );
+      } else {
+        setErrorSignUp("An error occurred when creating the user");
+      }
     }
   }
 
@@ -85,6 +97,8 @@ export default function Signup() {
             value="Create account"
             className={styles.inputSubmit}
           />
+
+          {errorSignUp && <p className={styles.error}>{errorSignUp}</p>}
         </form>
 
         <style jsx>
