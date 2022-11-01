@@ -1,6 +1,8 @@
 import Layout from "../components/Layout";
 import styles from "../styles/Form.module.css";
 
+import { register } from "../firebase";
+
 //Validaciones
 import useValidation from "../hooks/useValidation";
 import validateSignUp from "../validation/validateSignUp";
@@ -12,14 +14,21 @@ const INITIAL_STATE = {
 };
 
 export default function Signup() {
-  const createAccount = () => {
-    console.log("creando cuenta...");
-  };
-
-  const { data, error, handleChange, handleSubmit, handleBlur } =
-    useValidation(INITIAL_STATE, validateSignUp, createAccount);
+  const { data, error, handleChange, handleSubmit, handleBlur } = useValidation(
+    INITIAL_STATE,
+    validateSignUp,
+    createAccount
+  );
 
   const { name, email, password } = data;
+
+  async function createAccount() {
+    try {
+      await register(name, email, password);
+    } catch (err) {
+      console.error("An error occurred when creating the user", err.message);
+    }
+  }
 
   return (
     <Layout>
