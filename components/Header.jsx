@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import Search from "./Search";
 import Nav from "./Nav";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
+import { FirebaseContext } from "../firebase";
 
 const Header = () => {
-  const user = false;
+  const { user } = useContext(FirebaseContext);
 
   return (
     <header className={styles.header}>
@@ -22,8 +24,7 @@ const Header = () => {
         <div className={styles.containerButtons}>
           {user ? (
             <>
-              <p className={styles.userGreetings}>Hola: Inma</p>
-
+              <p className={styles.userGreetings}>Hola: {user.displayName}</p>
               <Link
                 href="/"
                 className={`${styles.button} ${styles.buttonDark}`}
