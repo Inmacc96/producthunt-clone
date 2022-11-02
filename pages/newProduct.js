@@ -4,7 +4,7 @@ import styles from "../styles/Form.module.css";
 
 //Validaciones
 import useValidation from "../hooks/useValidation";
-import validateSignUp from "../validation/validateSignUp";
+import validateNewProduct from "../validation/validateNewProduct";
 
 const INITIAL_STATE = {
   name: "",
@@ -19,7 +19,7 @@ export default function NewProduct() {
 
   const { data, error, handleChange, handleSubmit, handleBlur } = useValidation(
     INITIAL_STATE,
-    validateSignUp,
+    validateNewProduct,
     createNewProduct
   );
 
@@ -85,6 +85,7 @@ export default function NewProduct() {
                 type="url"
                 id="url"
                 name="url"
+                placeholder="URL of your product"
                 value={url}
                 onChange={handleChange}
                 onBlur={handleBlur}
