@@ -36,9 +36,7 @@ export default function Login() {
           "There is no user record corresponding to this identifier"
         );
       } else if (err.message.match(/auth[^()]*/)[0] === "auth/wrong-password") {
-        setErrorLogIn(
-          "The password is invalid"
-        );
+        setErrorLogIn("The password is invalid");
       } else {
         setErrorLogIn("There was an error authenticating the user");
       }
