@@ -4,10 +4,9 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const user = useAuth();
-  console.log(user);
-
+  
   return (
-    <FirebaseContext.Provider value={{ register, logIn }}>
+    <FirebaseContext.Provider value={{ register, logIn, user }}>
       <Component {...pageProps} />
     </FirebaseContext.Provider>
   );

@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 import firebaseConfig from "./config";
@@ -26,6 +27,12 @@ export const register = async (name, email, password) => {
 export const logIn = async (email, password) => {
   const auth = getAuth(app);
   return signInWithEmailAndPassword(auth, email, password);
+};
+
+//Cierra la sesión del usuario
+export const logOut = async () => {
+  const auth = getAuth(app);
+  await signOut(auth);
 };
 
 export default app;

@@ -4,9 +4,18 @@ import Nav from "./Nav";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
 import { FirebaseContext } from "../firebase";
+import { logOut } from "../firebase";
 
 const Header = () => {
   const { user } = useContext(FirebaseContext);
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -22,12 +31,13 @@ const Header = () => {
         </div>
 
         <div className={styles.containerButtons}>
-          {user ? (
+          {user.displayName ? (
             <>
               <p className={styles.userGreetings}>Hola: {user.displayName}</p>
               <Link
                 href="/"
                 className={`${styles.button} ${styles.buttonDark}`}
+                onClick={handleLogOut}
               >
                 Log Out
               </Link>
