@@ -4,6 +4,13 @@
   margin: 5rem auto 0 auto;
 }
 
+.form .fieldset {
+  margin: 2rem 0;
+  border: 1px solid #e1e1e1;
+  font-size: 2rem;
+  padding: 2rem;
+}
+
 .field {
   margin-bottom: 2rem;
   display: flex;
@@ -15,9 +22,14 @@
   font-size: 1.8rem;
 }
 
-.field input {
+.field input,
+.field textarea {
   flex: 1;
   padding: 1rem;
+}
+
+.field textarea{
+  height: 400px;
 }
 
 .inputSubmit {
