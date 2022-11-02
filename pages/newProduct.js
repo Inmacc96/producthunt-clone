@@ -1,9 +1,9 @@
 import Layout from "../components/Layout";
 
-export default function Recent() {
+export default function NewProduct() {
   return (
     <Layout>
-      <p>Recent</p>
+      <p>New product</p>
     </Layout>
   );
 }
