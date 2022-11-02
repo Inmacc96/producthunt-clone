@@ -1,6 +1,6 @@
-import app, { register } from "./firebase";
+import app, { register, logIn } from "./firebase";
 import FirebaseContext from "./context";
 
-export { register, FirebaseContext };
+export { register, logIn, FirebaseContext };
 
 export default app;

@@ -3,7 +3,7 @@ import Router from "next/router";
 import Layout from "../components/Layout";
 import styles from "../styles/Form.module.css";
 
-import { register } from "../firebase";
+import { logIn } from "../firebase";
 
 //Validaciones
 import useValidation from "../hooks/useValidation";
@@ -15,18 +15,34 @@ const INITIAL_STATE = {
 };
 
 export default function Login() {
-  const [errorSignUp, setErrorSignUp] = useState("");
+  const [errorLogIn, setErrorLogIn] = useState("");
 
   const { data, error, handleChange, handleSubmit, handleBlur } = useValidation(
     INITIAL_STATE,
     validateLogIn,
-    logIn
+    logInUser
   );
 
   const { email, password } = data;
 
-  function logIn() {
-    console.log("Log in....");
+  async function logInUser() {
+    try {
+      await logIn(email, password);
+      Router.push("/");
+    } catch (err) {
+      console.error("There was an error authenticating the user", err.message);
+      if (err.message.match(/auth[^()]*/)[0] === "auth/user-not-found") {
+        setErrorLogIn(
+          "There is no user record corresponding to this identifier"
+        );
+      } else if (err.message.match(/auth[^()]*/)[0] === "auth/wrong-password") {
+        setErrorLogIn(
+          "The password is invalid"
+        );
+      } else {
+        setErrorLogIn("There was an error authenticating the user");
+      }
+    }
   }
 
   return (
@@ -66,7 +82,7 @@ export default function Login() {
 
           <input type="submit" value="Log In" className={styles.inputSubmit} />
 
-          {errorSignUp && <p className={styles.error}>{errorSignUp}</p>}
+          {errorLogIn && <p className={styles.error}>{errorLogIn}</p>}
         </form>
 
         <style jsx>
