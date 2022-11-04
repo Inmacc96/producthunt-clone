@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { FirebaseContext } from "../firebase";
+import { useRouter } from "next/router";
 import styles from "../styles/Form.module.css";
+
+import { addProduct } from "../firebase";
 
 //Validaciones
 import useValidation from "../hooks/useValidation";
@@ -8,7 +12,6 @@ import validateNewProduct from "../validation/validateNewProduct";
 const INITIAL_STATE = {
   name: "",
   company: "",
-  image: "",
   url: "",
   description: "",
 };
@@ -22,9 +25,34 @@ export default function NewProduct() {
     createNewProduct
   );
 
-  const { name, company, image, url, description } = data;
+  const { name, company, url, description } = data;
 
-  async function createNewProduct() {}
+  // Hook de routing para redireccionar
+  const router = useRouter();
+
+  //Context con las operaciones CRUD de Firebase
+  const { user } = useContext(FirebaseContext);
+
+  async function createNewProduct() {
+    // Si el usuario no está autenticado, llevar al login
+    if (!user) {
+      return router.push("/");
+    }
+
+    // Crear el objeto del nuevo producto
+    const product = {
+      name,
+      company,
+      url,
+      description,
+      votes: 0,
+      comments: [],
+      created: Date.now(),
+    };
+
+    // Insertarlos en la base de datos
+    await addProduct(product);
+  }
 
   return (
     <>
@@ -62,7 +90,7 @@ export default function NewProduct() {
           </div>
 
           {error.company && <p className={styles.error}>{error.company}</p>}
-
+          {/* 
           <div className={styles.field}>
             <label htmlFor="image">Image</label>
             <input
@@ -75,7 +103,7 @@ export default function NewProduct() {
             />
           </div>
 
-          {error.image && <p className={styles.error}>{error.image}</p>}
+          {error.image && <p className={styles.error}>{error.image}</p>} */}
 
           <div className={styles.field}>
             <label htmlFor="url">Url</label>

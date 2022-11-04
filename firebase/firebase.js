@@ -8,6 +8,9 @@ import {
   signOut,
 } from "firebase/auth";
 
+//Importar la base de datos
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
 import firebaseConfig from "./config";
 
 const app = initializeApp(firebaseConfig);
@@ -33,6 +36,15 @@ export const logIn = async (email, password) => {
 export const logOut = async () => {
   const auth = getAuth(app);
   await signOut(auth);
+};
+
+// Agregar un registro a la base de datos
+export const addProduct = async (data) => {
+  //Inicializar Cloud Firestore y obtener una referencia del servicio
+  const db = getFirestore(app);
+
+  // Agregar un documento con un ID generado
+  return await addDoc(collection(db, "products"), data)
 };
 
 export default app;
