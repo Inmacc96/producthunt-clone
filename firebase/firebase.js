@@ -11,6 +11,9 @@ import {
 //Importar la base de datos
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
+// Importar storage
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+
 import firebaseConfig from "./config";
 
 const app = initializeApp(firebaseConfig);
@@ -44,7 +47,19 @@ export const addProduct = async (data) => {
   const db = getFirestore(app);
 
   // Agregar un documento con un ID generado
-  return await addDoc(collection(db, "products"), data)
+  return await addDoc(collection(db, "products"), data);
+};
+
+export const uploadFile = (file) => {
+  const storage = getStorage(app);
+
+  // Se obtiene referencia de la ubicación donde se guardará la imagen
+  const storageRef = ref(storage, "images/" + file.name);
+
+  // Se realiza la subida del archivo
+  const uploadTask = uploadBytesResumable(storageRef, file);
+
+  return uploadTask;
 };
 
 export default app;
