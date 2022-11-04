@@ -15,21 +15,23 @@ const ProductDetails = ({ product }) => {
   } = product;
 
   return (
-    <li>
+    <li className={styles.liProduct}>
       {/* Description */}
-      <div>
+      <div className={styles.info}>
         <div>
           <img src={image} className={styles.img} />
         </div>
 
         <div>
-          <h1>{name}</h1>
+          <a className={styles.title}>{name}</a>
 
-          <p>{description}</p>
+          <p className={styles.description}>{description}</p>
 
-          <div>
-            <img src="/static/img/comment.png" />
-            <p>{comments.length} Comments</p>
+          <div className={styles.comments}>
+            <div>
+              <img src="/static/img/comment.png" />
+              <p>{comments.length} Comments</p>
+            </div>
           </div>
 
           <p>Published ago: {formatDistanceToNow(new Date(created))}</p>
@@ -37,7 +39,7 @@ const ProductDetails = ({ product }) => {
       </div>
 
       {/*  Votes */}
-      <div>
+      <div className={styles.votes}>
         <div>&#9650;</div>
         <p>{votes}</p>
       </div>
