@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Router from "next/router";
-import Layout from "../components/Layout";
 import styles from "../styles/Form.module.css";
 
 import { logIn } from "../firebase";
@@ -44,54 +43,52 @@ export default function Login() {
   }
 
   return (
-    <Layout>
-      <>
-        <h1>Log In</h1>
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
-          <div className={styles.field}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="Your Email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
+    <>
+      <h1>Log In</h1>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.field}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Your Email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
 
-          {error.email && <p className={styles.error}>{error.email}</p>}
+        {error.email && <p className={styles.error}>{error.email}</p>}
 
-          <div className={styles.field}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Your Password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
+        <div className={styles.field}>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Your Password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
 
-          {error.password && <p className={styles.error}>{error.password}</p>}
+        {error.password && <p className={styles.error}>{error.password}</p>}
 
-          <input type="submit" value="Log In" className={styles.inputSubmit} />
+        <input type="submit" value="Log In" className={styles.inputSubmit} />
 
-          {errorLogIn && <p className={styles.error}>{errorLogIn}</p>}
-        </form>
+        {errorLogIn && <p className={styles.error}>{errorLogIn}</p>}
+      </form>
 
-        <style jsx>
-          {`
-            h1 {
-              text-align: center;
-              margin-top: 5rem;
-            }
-          `}
-        </style>
-      </>
-    </Layout>
+      <style jsx>
+        {`
+          h1 {
+            text-align: center;
+            margin-top: 5rem;
+          }
+        `}
+      </style>
+    </>
   );
 }

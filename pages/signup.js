@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Router from "next/router";
-import Layout from "../components/Layout";
 import styles from "../styles/Form.module.css";
 
 import { register } from "../firebase";
@@ -43,73 +42,71 @@ export default function Signup() {
   }
 
   return (
-    <Layout>
-      <>
-        <h1>Sign Up</h1>
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
-          <div className={styles.field}>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Your Name"
-              name="name"
-              value={name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-
-          {error.name && <p className={styles.error}>{error.name}</p>}
-
-          <div className={styles.field}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="Your Email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-
-          {error.email && <p className={styles.error}>{error.email}</p>}
-
-          <div className={styles.field}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Your Password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-
-          {error.password && <p className={styles.error}>{error.password}</p>}
-
+    <>
+      <h1>Sign Up</h1>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.field}>
+          <label htmlFor="name">Name</label>
           <input
-            type="submit"
-            value="Create account"
-            className={styles.inputSubmit}
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
+        </div>
 
-          {errorSignUp && <p className={styles.error}>{errorSignUp}</p>}
-        </form>
+        {error.name && <p className={styles.error}>{error.name}</p>}
 
-        <style jsx>
-          {`
-            h1 {
-              text-align: center;
-              margin-top: 5rem;
-            }
-          `}
-        </style>
-      </>
-    </Layout>
+        <div className={styles.field}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Your Email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
+
+        {error.email && <p className={styles.error}>{error.email}</p>}
+
+        <div className={styles.field}>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Your Password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
+
+        {error.password && <p className={styles.error}>{error.password}</p>}
+
+        <input
+          type="submit"
+          value="Create account"
+          className={styles.inputSubmit}
+        />
+
+        {errorSignUp && <p className={styles.error}>{errorSignUp}</p>}
+      </form>
+
+      <style jsx>
+        {`
+          h1 {
+            text-align: center;
+            margin-top: 5rem;
+          }
+        `}
+      </style>
+    </>
   );
 }
