@@ -9,7 +9,14 @@ import {
 } from "firebase/auth";
 
 //Importar la base de datos
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  getDocs,
+} from "firebase/firestore";
 
 // Importar storage
 import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
@@ -60,6 +67,18 @@ export const uploadFile = (file) => {
   const uploadTask = uploadBytesResumable(storageRef, file);
 
   return uploadTask;
+};
+
+export const getData = async () => {
+  const db = getFirestore(app);
+
+  const productsRef = collection(db, "products");
+
+  const q = query(productsRef, orderBy("created", "desc"));
+
+  const querySnapshot = await getDocs(q);
+
+  return querySnapshot;
 };
 
 export default app;
