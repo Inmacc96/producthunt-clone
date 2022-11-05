@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
+import { FirebaseContext } from "../../firebase";
 import Error404 from "../../components/Error404";
 import Spinner from "../../components/Spinner";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -14,6 +15,9 @@ const Product = () => {
   const {
     query: { id },
   } = router;
+
+  // Context Firebase
+  const { user } = useContext(FirebaseContext);
 
   //State product
   const [product, setProduct] = useState({});
@@ -35,64 +39,86 @@ const Product = () => {
     }
   }, [id]);
 
-  const { comments, created, description, company, name, url, image, votes, creator } =
-    product;
+  const {
+    comments,
+    created,
+    description,
+    company,
+    name,
+    url,
+    image,
+    votes,
+    creator,
+  } = product;
 
-  if (Object.keys(product).length === 0) return <Spinner />;
   return (
     <>
-      {error && <Error404 />}
+      {error ? (
+        <Error404 title="Non-existent product" subtitle=""/>
+      ) : Object.keys(product).length === 0 ? (
+        <Spinner />
+      ) : (
+        <div className={styles.container}>
+          <h1 className={styles.title}>{name}</h1>
 
-      <div className={styles.container}>
-        <h1 className={styles.title}>{name}</h1>
+          <div className={styles.containerProduct}>
+            <div>
+              <p>Published ago: {formatDistanceToNow(new Date(created))}</p>
+              <p>
+                By: {creator.name} of {company}
+              </p>
+              <img src={image} />
+              <p>{description}</p>
 
-        <div className={styles.containerProduct}>
-          <div>
-            <p>Published ago: {formatDistanceToNow(new Date(created))}</p>
-            <p>By: {creator.name} from {company}</p>
-            <img src={image} />
-            <p>{description}</p>
+              {user.displayName && (
+                <>
+                  <h2>Add your comment</h2>
+                  <form>
+                    <div className={styles.field}>
+                      <input type="text" name="message" />
+                    </div>
 
-            <h2>Add your comment</h2>
-            <form>
-              <div className={styles.field}>
-                <input type="text" name="message" />
-              </div>
+                    <input
+                      type="submit"
+                      className={styles.inputSubmit}
+                      value="Add comment"
+                    />
+                  </form>
+                </>
+              )}
 
-              <input
-                type="submit"
-                className={styles.inputSubmit}
-                value="Add comment"
-              />
-            </form>
+              <h2 className={styles.h2Comments}>Comments</h2>
 
-            <h2 className={styles.h2Comments}>Comments</h2>
-
-            {comments.map((comment) => {
-              <li>
-                <p>{comment.name}</p>
-                <p>Written by: {comment.username}</p>
-              </li>;
-            })}
-          </div>
-
-          <aside>
-            <a
-              className={`${styles.button} ${styles.buttonDark}`}
-              href={url}
-              target="_blank"
-            >
-              Visit URL
-            </a>
-
-            <div className={styles.divVotes}>
-              <p className={styles.nVotes}>{votes} Votes</p>
-
-              <a className={`${styles.button} ${styles.buttonLight}`}>Vote</a>
+              {comments.map((comment) => {
+                <li>
+                  <p>{comment.name}</p>
+                  <p>Written by: {comment.username}</p>
+                </li>;
+              })}
             </div>
-          </aside>
+
+            <aside>
+              <a
+                className={`${styles.button} ${styles.buttonDark}`}
+                href={url}
+                target="_blank"
+              >
+                Visit URL
+              </a>
+
+              <div className={styles.divVotes}>
+                <p className={styles.nVotes}>{votes} Votes</p>
+
+                {user.displayName && (
+                  <a className={`${styles.button} ${styles.buttonLight}`}>
+                    Vote
+                  </a>
+                )}
+              </div>
+            </aside>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

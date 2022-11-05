@@ -1,6 +1,7 @@
 import { useState, useContext, use } from "react";
 import { FirebaseContext } from "../firebase";
 import { useRouter } from "next/router";
+import Error404 from "../components/Error404";
 import styles from "../styles/Form.module.css";
 
 import { addProduct, uploadFile } from "../firebase";
@@ -105,6 +106,7 @@ export default function NewProduct() {
     );
   };
 
+  if (!user.displayName) return <Error404 title="This page is not visible to you" subtitle="If you wish to access it, please login or register."/>;
   return (
     <>
       <h1>New Product</h1>
