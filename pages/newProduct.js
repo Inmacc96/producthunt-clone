@@ -59,6 +59,7 @@ export default function NewProduct() {
         id: user.uid,
         name: user.displayName,
       },
+      votedBy: [],
     };
 
     // Insertarlos en la base de datos
@@ -106,7 +107,13 @@ export default function NewProduct() {
     );
   };
 
-  if (!user.displayName) return <Error404 title="This page is not visible to you" subtitle="If you wish to access it, please login or register."/>;
+  if (!user.displayName)
+    return (
+      <Error404
+        title="This page is not visible to you"
+        subtitle="If you wish to access it, please login or register."
+      />
+    );
   return (
     <>
       <h1>New Product</h1>
@@ -119,7 +126,7 @@ export default function NewProduct() {
             <input
               type="text"
               id="name"
-              placeholder="Your Name"
+              placeholder="Product Name"
               name="name"
               value={name}
               onChange={handleChange}

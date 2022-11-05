@@ -49,6 +49,7 @@ const Product = () => {
     image,
     votes,
     creator,
+    votedBy,
   } = product;
 
   //Administrar y validar los votos
@@ -60,11 +61,17 @@ const Product = () => {
     // Obtener y sumar un nuevo voto
     const newTotal = votes + 1;
 
+    // Verificar si el usuario actual ha votado
+    if (votedBy.includes(user.uid)) return;
+
+    // Guardar el ID del usuario que ha votado
+    const newVoters = [...votedBy, user.uid];
+
     // Actualizar en la BD
-    updateData(id, { votes: newTotal });
+    updateData(id, { votes: newTotal, votedBy: newVoters });
 
     // Actualizar en el state
-    setProduct({ ...product, votes: newTotal });
+    setProduct({ ...product, votes: newTotal, votedBy: newVoters });
   };
 
   return (
