@@ -19,9 +19,10 @@ const Product = () => {
   // Context Firebase
   const { user } = useContext(FirebaseContext);
 
-  //State product
+  //States del componente
   const [product, setProduct] = useState({});
   const [error, setError] = useState(false);
+  const [comment, setComment] = useState({});
 
   useEffect(() => {
     //Nos vamos a esperar a que haya un id para realizar la consulta
@@ -74,6 +75,35 @@ const Product = () => {
     setProduct({ ...product, votes: newTotal, votedBy: newVoters });
   };
 
+  // Funciones para crear comentarios
+  const handleChangeComment = (e) => {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+
+    if (!user.displayName) {
+      return router.push("/login");
+    }
+
+    // Información extra al comentario
+    comment.userId = user.uid;
+    comment.userName = user.displayName;
+
+    // Tomar copia de comentarios y agregarlo al arreglo
+    const newComments = [...comments, comment];
+
+    // Actualizar la BD
+    updateData(id, { comments: newComments });
+
+    // Actualizar el state
+    setProduct({ ...product, comments: newComments });
+  };
+
   return (
     <>
       {error ? (
@@ -96,9 +126,13 @@ const Product = () => {
               {user.displayName && (
                 <>
                   <h2>Add your comment</h2>
-                  <form>
+                  <form onSubmit={handleSubmitComment}>
                     <div className={styles.field}>
-                      <input type="text" name="message" />
+                      <input
+                        type="text"
+                        name="message"
+                        onChange={handleChangeComment}
+                      />
                     </div>
 
                     <input
@@ -112,12 +146,26 @@ const Product = () => {
 
               <h2 className={styles.h2Comments}>Comments</h2>
 
-              {comments.map((comment) => {
-                <li>
-                  <p>{comment.name}</p>
-                  <p>Written by: {comment.username}</p>
-                </li>;
-              })}
+              {comments.length === 0 ? (
+                "No comments yet"
+              ) : (
+                <ul>
+                  {comments.map((comment, i) => (
+                    <li
+                      key={`${comment.userId}-${i}`}
+                      className={styles.comment}
+                    >
+                      <p>{comment.message}</p>
+                      <p>
+                        Written by:
+                        <span>
+                          {""} {comment.userName}
+                        </span>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             <aside>

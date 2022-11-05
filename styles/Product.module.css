@@ -86,3 +86,12 @@
 .nVotes {
   text-align: center;
 }
+
+.comment {
+  border: 1px solid #e1e1e1;
+  padding: 2rem;
+}
+
+.comment span {
+  font-weight: bold;
+}
