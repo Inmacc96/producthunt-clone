@@ -35,7 +35,7 @@ const Product = () => {
     }
   }, [id]);
 
-  const { comments, created, description, company, name, url, image, votes } =
+  const { comments, created, description, company, name, url, image, votes, creator } =
     product;
 
   if (Object.keys(product).length === 0) return <Spinner />;
@@ -49,6 +49,7 @@ const Product = () => {
         <div className={styles.containerProduct}>
           <div>
             <p>Published ago: {formatDistanceToNow(new Date(created))}</p>
+            <p>By: {creator.name} from {company}</p>
             <img src={image} />
             <p>{description}</p>
 

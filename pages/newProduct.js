@@ -54,6 +54,10 @@ export default function NewProduct() {
       votes: 0,
       comments: [],
       created: Date.now(),
+      creator: {
+        id: user.uid,
+        name: user.displayName,
+      },
     };
 
     // Insertarlos en la base de datos
