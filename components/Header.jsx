@@ -33,7 +33,7 @@ const Header = () => {
         <div className={styles.containerButtons}>
           {user.displayName ? (
             <>
-              <p className={styles.userGreetings}>Hola: {user.displayName}</p>
+              <p className={styles.userGreetings}>Hi: {user.displayName}</p>
               <Link
                 href="/"
                 className={`${styles.button} ${styles.buttonDark}`}
