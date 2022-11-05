@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Error404 from "../../components/Error404";
 import Spinner from "../../components/Spinner";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import { getDatabyId } from "../../firebase";
 
@@ -46,9 +47,49 @@ const Product = () => {
         <h1 className={styles.title}>{name}</h1>
 
         <div className={styles.containerProduct}>
-          <div>1</div>
+          <div>
+            <p>Published ago: {formatDistanceToNow(new Date(created))}</p>
+            <img src={image} />
+            <p>{description}</p>
 
-          <aside>2</aside>
+            <h2>Add your comment</h2>
+            <form>
+              <div className={styles.field}>
+                <input type="text" name="message" />
+              </div>
+
+              <input
+                type="submit"
+                className={styles.inputSubmit}
+                value="Add comment"
+              />
+            </form>
+
+            <h2 className={styles.h2Comments}>Comments</h2>
+
+            {comments.map((comment) => {
+              <li>
+                <p>{comment.name}</p>
+                <p>Written by: {comment.username}</p>
+              </li>;
+            })}
+          </div>
+
+          <aside>
+            <a
+              className={`${styles.button} ${styles.buttonDark}`}
+              href={url}
+              target="_blank"
+            >
+              Visit URL
+            </a>
+
+            <div className={styles.divVotes}>
+              <p className={styles.nVotes}>{votes} Votes</p>
+
+              <a className={`${styles.button} ${styles.buttonLight}`}>Vote</a>
+            </div>
+          </aside>
         </div>
       </div>
     </>
