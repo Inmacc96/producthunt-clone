@@ -16,6 +16,8 @@ import {
   query,
   orderBy,
   getDocs,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 
 // Importar storage
@@ -79,6 +81,14 @@ export const getData = async () => {
   const querySnapshot = await getDocs(q);
 
   return querySnapshot;
+};
+
+export const getDatabyId = async (id) => {
+  const db = getFirestore(app);
+
+  const productsRef = doc(db, "products", id);
+
+  return await getDoc(productsRef);
 };
 
 export default app;
