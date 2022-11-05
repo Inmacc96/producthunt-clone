@@ -1,5 +1,6 @@
-import styles from "../styles/ProductDetails.module.css";
+import Link from "next/link";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import styles from "../styles/ProductDetails.module.css";
 
 const ProductDetails = ({ product }) => {
   const {
@@ -23,7 +24,9 @@ const ProductDetails = ({ product }) => {
         </div>
 
         <div>
-          <a className={styles.title}>{name}</a>
+          <Link href={`/products/${id}`} className={styles.title}>
+            {name}
+          </Link>
 
           <p className={styles.description}>{description}</p>
 
