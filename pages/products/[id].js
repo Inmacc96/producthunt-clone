@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Error404 from "../../components/Error404";
+import Spinner from "../../components/Spinner";
 
 import { getDatabyId } from "../../firebase";
+
+import styles from "../../styles/Product.module.css";
 
 const Product = () => {
   //Routing para obtener el id actual
@@ -31,7 +34,25 @@ const Product = () => {
     }
   }, [id]);
 
-  return <>{error && <Error404 />}</>;
+  const { comments, created, description, company, name, url, image, votes } =
+    product;
+
+  if (Object.keys(product).length === 0) return <Spinner />;
+  return (
+    <>
+      {error && <Error404 />}
+
+      <div className={styles.container}>
+        <h1 className={styles.title}>{name}</h1>
+
+        <div className={styles.containerProduct}>
+          <div>1</div>
+
+          <aside>2</aside>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Product;

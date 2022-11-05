@@ -1,0 +1,19 @@
+.container {
+  max-width: 1200px;
+  width: 95%;
+  padding: 5rem 0;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  .containerProduct {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 2rem;
+  }
+}
