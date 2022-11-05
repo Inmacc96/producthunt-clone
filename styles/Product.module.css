@@ -52,6 +52,7 @@
 
 .button {
   display: block;
+  width: 100%;
   font-weight: 700;
   text-transform: uppercase;
   border: 1px solid #d1d1d1;
@@ -78,8 +79,8 @@
   background-color: white;
 }
 
-.divVotes{
-    margin-top: 5rem;
+.divVotes {
+  margin-top: 5rem;
 }
 
 .nVotes {

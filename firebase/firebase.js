@@ -18,6 +18,7 @@ import {
   getDocs,
   getDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 
 // Importar storage
@@ -83,12 +84,22 @@ export const getData = async () => {
   return querySnapshot;
 };
 
+// Obtener datos por el id
 export const getDatabyId = async (id) => {
   const db = getFirestore(app);
 
   const productsRef = doc(db, "products", id);
 
   return await getDoc(productsRef);
+};
+
+// Actualizar un registro
+export const updateData = async (id, data) => {
+  const db = getFirestore(app);
+
+  const productRef = doc(db, "products", id);
+
+  await updateDoc(productRef, data);
 };
 
 export default app;

@@ -5,7 +5,7 @@ import Error404 from "../../components/Error404";
 import Spinner from "../../components/Spinner";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-import { getDatabyId } from "../../firebase";
+import { getDatabyId, updateData } from "../../firebase";
 
 import styles from "../../styles/Product.module.css";
 
@@ -51,10 +51,26 @@ const Product = () => {
     creator,
   } = product;
 
+  //Administrar y validar los votos
+  const handleVoteProduct = async () => {
+    if (!user.displayName) {
+      return router.push("/login");
+    }
+
+    // Obtener y sumar un nuevo voto
+    const newTotal = votes + 1;
+
+    // Actualizar en la BD
+    updateData(id, { votes: newTotal });
+
+    // Actualizar en el state
+    setProduct({ ...product, votes: newTotal });
+  };
+
   return (
     <>
       {error ? (
-        <Error404 title="Non-existent product" subtitle=""/>
+        <Error404 title="Non-existent product" subtitle="" />
       ) : Object.keys(product).length === 0 ? (
         <Spinner />
       ) : (
@@ -110,9 +126,13 @@ const Product = () => {
                 <p className={styles.nVotes}>{votes} Votes</p>
 
                 {user.displayName && (
-                  <a className={`${styles.button} ${styles.buttonLight}`}>
+                  <button
+                    type="button"
+                    className={`${styles.button} ${styles.buttonLight}`}
+                    onClick={handleVoteProduct}
+                  >
                     Vote
-                  </a>
+                  </button>
                 )}
               </div>
             </aside>
