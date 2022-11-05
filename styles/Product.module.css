@@ -95,3 +95,13 @@
 .comment span {
   font-weight: bold;
 }
+
+.creatorProduct {
+  padding: 0.5rem 2rem;
+  background-color: #D1552F;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}

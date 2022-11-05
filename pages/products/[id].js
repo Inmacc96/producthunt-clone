@@ -83,6 +83,11 @@ const Product = () => {
     });
   };
 
+  // Identifica si el comentario es del creador del producto
+  const isCreator = (id) => {
+    return creator.id === id;
+  };
+
   const handleSubmitComment = (e) => {
     e.preventDefault();
 
@@ -162,6 +167,9 @@ const Product = () => {
                           {""} {comment.userName}
                         </span>
                       </p>
+                      {isCreator(comment.userId) && (
+                        <p className={styles.creatorProduct}>Is Creator</p>
+                      )}
                     </li>
                   ))}
                 </ul>
