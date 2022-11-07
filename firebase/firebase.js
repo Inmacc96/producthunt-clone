@@ -19,6 +19,7 @@ import {
   getDoc,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 // Importar storage
@@ -100,6 +101,14 @@ export const updateData = async (id, data) => {
   const productRef = doc(db, "products", id);
 
   await updateDoc(productRef, data);
+};
+
+// Eliminar un registro
+export const deleteData = async (id) => {
+  const db = getFirestore(app);
+
+  const productRef = doc(db, "products", id);
+  await deleteDoc(productRef);
 };
 
 export default app;

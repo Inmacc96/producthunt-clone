@@ -6,7 +6,8 @@ import app, {
   uploadFile,
   getData,
   getDatabyId,
-  updateData
+  updateData,
+  deleteData,
 } from "./firebase";
 import FirebaseContext from "./context";
 
@@ -19,7 +20,8 @@ export {
   uploadFile,
   getData,
   getDatabyId,
-  updateData
+  updateData,
+  deleteData,
 };
 
 export default app;

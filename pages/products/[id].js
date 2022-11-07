@@ -5,7 +5,7 @@ import Error404 from "../../components/Error404";
 import Spinner from "../../components/Spinner";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-import { getDatabyId, updateData } from "../../firebase";
+import { getDatabyId, updateData, deleteData } from "../../firebase";
 
 import styles from "../../styles/Product.module.css";
 
@@ -109,6 +109,32 @@ const Product = () => {
     setProduct({ ...product, comments: newComments });
   };
 
+  // Función que comprueba si el creador del producto es el mismo que el que está autenticado
+  const canDelete = () => {
+    if (!user.displayName) return false;
+
+    return creator.id === user.uid;
+  };
+
+  //Eliminar un producto de la BD
+  const deleteProduct = async () => {
+    //Si el usuario no ha iniciado sesión o no es el creado se el redirige a login
+    if (!user.displayName) {
+      return router.push("/login");
+    }
+
+    if (creator.id !== user.uid) {
+      return router.push("/login");
+    }
+
+    try {
+      await deleteData(id);
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       {error ? (
@@ -200,6 +226,16 @@ const Product = () => {
               </div>
             </aside>
           </div>
+
+          {canDelete() && (
+            <button
+              type="button"
+              className={`${styles.button} ${styles.buttonLight}`}
+              onClick={deleteProduct}
+            >
+              Delete Product
+            </button>
+          )}
         </div>
       )}
     </>
