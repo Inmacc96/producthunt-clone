@@ -64,6 +64,8 @@ export default function NewProduct() {
 
     // Insertarlos en la base de datos
     await addProduct(product);
+
+    return router.push("/");
   }
 
   const handleImageUpload = (e) => {
