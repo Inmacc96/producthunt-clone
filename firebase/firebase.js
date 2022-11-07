@@ -73,12 +73,12 @@ export const uploadFile = (file) => {
   return uploadTask;
 };
 
-export const getData = async () => {
+export const getData = async (order) => {
   const db = getFirestore(app);
 
   const productsRef = collection(db, "products");
 
-  const q = query(productsRef, orderBy("created", "desc"));
+  const q = query(productsRef, orderBy(order, "desc"));
 
   const querySnapshot = await getDocs(q);
 
